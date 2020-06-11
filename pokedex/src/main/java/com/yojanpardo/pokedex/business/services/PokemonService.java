@@ -35,8 +35,10 @@ public class PokemonService {
 			Response response = client.newCall(request).execute();
 			String pokemonsListJson = response.body().string();
 			PokemonsListResponse pokemonsListResponse = gson.fromJson(pokemonsListJson, PokemonsListResponse.class);
-			pokemonsListResponse.setNext(pokemonsListResponse.getNext().replace("https://pokeapi.co/api/v2/pokemon", urlContext.getPokemonContext()));
-			pokemonsListResponse.setPrevious(pokemonsListResponse.getPrevious().replace("https://pokeapi.co/api/v2/pokemon", urlContext.getPokemonContext()));
+			if ( pokemonsListResponse.getNext() != null)
+				pokemonsListResponse.setNext(pokemonsListResponse.getNext().replace("https://pokeapi.co/api/v2/pokemon", urlContext.getPokemonContext()));
+			if (pokemonsListResponse.getPrevious() != null)
+				pokemonsListResponse.setPrevious(pokemonsListResponse.getPrevious().replace("https://pokeapi.co/api/v2/pokemon", urlContext.getPokemonContext()));
 			return pokemonsListResponse;
 		} catch (Exception ex) {
 			throw(ex);
