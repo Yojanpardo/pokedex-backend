@@ -8,9 +8,6 @@ package com.yojanpardo.pokedex.context;
  *
  */
 public class UrlContext {
-	private String PokemonContext = "http://localhost:8080/api/v1/pokemon";
-
-	public String getPokemonContext() {
-		return PokemonContext;
-	}	
+	public static final String POKEMON_CONTEXT = "http://localhost:8080/api/v1/pokemon";
+	public static final String POKEMON_IMAGE_URI = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemonId}.png";
 }
