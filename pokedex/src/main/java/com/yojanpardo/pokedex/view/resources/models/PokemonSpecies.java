@@ -14,9 +14,10 @@ import lombok.Data;
  *
  */
 @Data
-public class AbilityDetail {
-	private Map<String, String> ability;
-	@JsonProperty("is_hidden")
-	private boolean is_hidden;
-	private short slot;
+public class PokemonSpecies {
+	private int id;
+	private String name;
+	@JsonProperty("flavor_text_entries")
+	private FlavorTextEntry[] flavor_text_entries;
+	private Map<String, String> evolution_chain;
 }

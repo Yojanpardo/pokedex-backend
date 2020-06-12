@@ -14,9 +14,9 @@ import lombok.Data;
  *
  */
 @Data
-public class AbilityDetail {
-	private Map<String, String> ability;
-	@JsonProperty("is_hidden")
-	private boolean is_hidden;
-	private short slot;
+public class Stat {
+	@JsonProperty("base_stat")
+	private int base_stat;
+	private int effort;
+	private Map<String, String> stat;
 }

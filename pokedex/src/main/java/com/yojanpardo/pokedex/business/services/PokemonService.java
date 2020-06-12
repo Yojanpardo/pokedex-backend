@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
+import com.yojanpardo.pokedex.business.repository.PokemonRepository;
 import com.yojanpardo.pokedex.context.UrlContext;
 import com.yojanpardo.pokedex.view.resources.models.PokemonDetailResponse;
+import com.yojanpardo.pokedex.view.resources.models.PokemonSpecies;
 import com.yojanpardo.pokedex.view.resources.models.PokemonsListResponse;
 
 import okhttp3.OkHttpClient;
@@ -23,12 +25,13 @@ import okhttp3.Response;
  */
 @Service
 @Transactional(readOnly = true)
-public class PokemonService {
-
-	private Gson gson = new Gson();
-	private OkHttpClient client = new OkHttpClient().newBuilder().build();
+public class PokemonService implements PokemonRepository {
 
 	public PokemonsListResponse getAllPokemons(String query) throws IOException {
+
+		Gson gson = new Gson();
+		OkHttpClient client = new OkHttpClient().newBuilder().build();
+		
 		try {
 			Request request = new Request.Builder().url("https://pokeapi.co/api/v2/pokemon".concat(query))
 					.method("GET", null).build();
@@ -56,6 +59,8 @@ public class PokemonService {
 	}
 
 	public PokemonDetailResponse getPokemon(int pokemonId) throws IOException {
+
+		Gson gson = new Gson();
 		OkHttpClient client = new OkHttpClient().newBuilder().build();
 		try {
 			Request request = new Request.Builder().url("https://pokeapi.co/api/v2/pokemon/" + pokemonId)
@@ -66,6 +71,20 @@ public class PokemonService {
 			return pokemonResponse;
 		} catch (Exception ex) {
 			throw (ex);
+		}
+	}
+	
+	public PokemonSpecies getPokemonSpecies(int pokemonId) throws IOException {
+		Gson gson = new Gson();
+		OkHttpClient client = new OkHttpClient().newBuilder().build();
+		try {
+			Request request = new Request.Builder().url(UrlContext.POKEMON_SPECIES_URL + pokemonId).method("GET", null).build();
+			Response response = client.newCall(request).execute();
+			String pokemonSpeciesJson = response.body().string();
+			PokemonSpecies pokemonSpecies = gson.fromJson(pokemonSpeciesJson, PokemonSpecies.class);
+			return pokemonSpecies;
+		} catch (Exception ex) {
+			throw(ex);
 		}
 	}
 }
