@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yojanpardo.pokedex.business.services.PokemonService;
+import com.yojanpardo.pokedex.business.repository.PokemonRepository;
 import com.yojanpardo.pokedex.view.resources.models.PokemonDetailResponse;
 import com.yojanpardo.pokedex.view.resources.models.PokemonsListResponse;
 
@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiResponses;
 public class PokemonResources {
 	
 	@Autowired
-	private PokemonService pokemonService;
+	private PokemonRepository pokemonRepository;
 	
 	@GetMapping()
 	@ApiOperation(value = "get all pokemons", notes = "Able to use params for pagination")
@@ -55,7 +55,7 @@ public class PokemonResources {
 			}
 		}
 		try {
-			pokemonsListResponse = pokemonService.getAllPokemons(query.toString());
+			pokemonsListResponse = pokemonRepository.getAllPokemons(query.toString());
 			return new ResponseEntity<PokemonsListResponse>(pokemonsListResponse, HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<PokemonsListResponse>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,7 +72,7 @@ public class PokemonResources {
 	public ResponseEntity<PokemonDetailResponse> getPokemon(@PathVariable("pokemonId") int pokemonId){
 		PokemonDetailResponse pokemon;
 		try {
-			pokemon = pokemonService.getPokemon(pokemonId);
+			pokemon = pokemonRepository.getPokemon(pokemonId);
 			
 			if (pokemon == null)
 				return new ResponseEntity<PokemonDetailResponse>(HttpStatus.NOT_FOUND);

@@ -16,4 +16,5 @@ public class PokemonDetailResponse {
 	private AbilityDetail[] abilities;
 	private int weight;
 	private Type[] types;
+	private Stat[] stats;
 }

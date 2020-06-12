@@ -14,9 +14,9 @@ import lombok.Data;
  *
  */
 @Data
-public class AbilityDetail {
-	private Map<String, String> ability;
-	@JsonProperty("is_hidden")
-	private boolean is_hidden;
-	private short slot;
+public class FlavorTextEntry {
+	@JsonProperty("flavor_text")
+	private String flavor_text;
+	private Map<String,String> language;
+	private Map<String, String> version;
 }
