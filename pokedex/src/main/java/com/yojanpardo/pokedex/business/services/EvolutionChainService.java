@@ -28,6 +28,7 @@ public class EvolutionChainService implements EvolutionChainRepository {
 			String json = response.body().string();
 			json = json.replace("https://pokeapi.co/api/v2/pokemon-species", UrlContext.POKEMON_CONTEXT);
 			EvolutionChain evolutionChain = gson.fromJson(json, EvolutionChain.class);
+			
 			return evolutionChain;
 		} catch (Exception ex) {
 			throw (ex);
