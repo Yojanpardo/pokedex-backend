@@ -3,7 +3,6 @@ package com.yojanpardo.pokedex.business.services;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.yojanpardo.pokedex.business.repository.EvolutionChainRepository;
@@ -15,7 +14,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 @Service
-@Transactional(readOnly = true)
 public class EvolutionChainService implements EvolutionChainRepository {
 	public EvolutionChain getEvolutionChain(String evolutionChainId) throws IOException {
 
