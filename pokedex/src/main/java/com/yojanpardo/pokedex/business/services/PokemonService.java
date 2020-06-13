@@ -6,7 +6,6 @@ package com.yojanpardo.pokedex.business.services;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.yojanpardo.pokedex.business.repository.PokemonRepository;
@@ -24,7 +23,6 @@ import okhttp3.Response;
  *
  */
 @Service
-@Transactional(readOnly = true)
 public class PokemonService implements PokemonRepository {
 
 	public PokemonsListResponse getAllPokemons(String query) throws IOException {
