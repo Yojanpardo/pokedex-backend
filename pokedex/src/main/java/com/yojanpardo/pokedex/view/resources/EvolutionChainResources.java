@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/api/v1/evolution-chain")
-@Api(tags = "Operations with pokemons")
+@Api(tags = "Operations with pokemon's evolution chain")
 @CrossOrigin("*")
 public class EvolutionChainResources {
 	
